@@ -18,8 +18,9 @@ const Users = () => {
 
   return (
     <div className="bg-gray-100 p-4">
-      <h2 className="text-2xl mb-4">Utilisateurs</h2>
+      <h2 className="text-2xl mb-4">Users</h2>
       <ul className="space-y-2">
+        {/* le map itère sur chaque utilisateur dans le tableau "users" */}
         {users.map(user => (
           <li key={user.id} className="p-4 rounded shadow bg-white">
             <h3 className="text-xl">{user.name}</h3>

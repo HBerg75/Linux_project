@@ -1,0 +1,3 @@
+# Example de cron job
+30 03 * * * root /bin/bash /script.sh "2023-07-15" "defaultPath" >/dev/null 2>&1
+
