@@ -10,23 +10,23 @@ RUN npm run build
 FROM nginx:1.21.1 AS production
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Install rsync and nano
+# Installer les dépendances
 RUN apt-get update && apt-get install -y rsync nano cron
 
-# Copy the script.sh file to the container
+# Copier le script.sh
 COPY script.sh /script.sh
 
-# Grant execution rights to the script.sh file
+# Donner les droits d'exécution au script.sh
 RUN chmod +x /script.sh
 
-# Copy the cron job file
+# Copier le cronjob
 COPY cronjob /etc/cron.d/my-cronjob
 
-# Give execution rights to the cron job
+# Donner les droits d'exécution au cronjob
 RUN chmod 0644 /etc/cron.d/my-cronjob
 
-# Apply the cron job
+# Appliquer le cronjob
 RUN crontab /etc/cron.d/my-cronjob
 
-# Start the cron service and Nginx
+# Lancer le cronjob et nginx
 CMD cron && nginx -g "daemon off;"
